@@ -1,8 +1,8 @@
 import axios from "axios";
-import {invmentApiKey} from "/src/js/env";
+import { invmentApiKey, pathApi } from "/src/env";
 
 export default axios.create({
-    baseURL: "http://invment.test:8080/api/v1",
+    baseURL: pathApi,
     headers: {
         Authorization: "Bearer " + invmentApiKey,
     },

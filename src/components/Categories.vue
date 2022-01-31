@@ -60,12 +60,8 @@ export default {
                     this.categories = data;
                 })
                 .catch((error) => {
-                    const {
-                        response: {
-                            data: { message },
-                        },
-                    } = error;
-                    console.log(message);
+                    
+                    console.log(error.toJSON());
                 });
         },
         editCategory: function () {

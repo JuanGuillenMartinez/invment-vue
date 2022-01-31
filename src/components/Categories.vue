@@ -44,7 +44,7 @@
                 </table>
             </div>
             <div class="container-cat container-form">
-                <FormCategory v-if="showed" :category="currentCategory" />
+                <FormCategory v-on:refreshCategories="refresh" v-if="showed" :category="currentCategory" />
             </div>
         </div>
     </div>
@@ -65,6 +65,10 @@ export default {
         };
     },
     methods: {
+        refresh: function(id) {
+            this.showCategory(id)
+            this.showCategories()
+        },
         setCurrentCategory: function (category) {
             this.currentCategory = category
             this.showed = true;
@@ -85,6 +89,9 @@ export default {
         showCategory: function (id) {
             this.currentId = id;
             this.showed = true;
+            request.get(id).then( ( { data: { data } } ) => {
+                this.currentCategory = data
+            })
             console.log(this.currentId);
         },
         deleteCategory: function (id) {

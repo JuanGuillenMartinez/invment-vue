@@ -22,6 +22,7 @@
             />
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
+        <button @click="$emit('refreshCategories', currentCategory.id)" type="button" class="btn btn-light" >Limpiar</button>
     </form>
 </template>
 
@@ -56,6 +57,7 @@ export default {
             deep: true,
         },
     },
+    emits:["refreshCategories"]
 };
 </script>
 

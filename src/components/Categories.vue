@@ -61,17 +61,12 @@ export default {
             categories: [],
             changed: false,
             showed: false,
-            currentId: null,
             currentCategory: null,
         };
     },
     methods: {
         setCurrentCategory: function (category) {
             this.currentCategory = category
-            this.showed = true;
-        },
-        setCurrentId: function (category) {
-            this.currentId = category.id
             this.showed = true;
         },
         showCategories: function () {
@@ -91,9 +86,6 @@ export default {
             this.currentId = id;
             this.showed = true;
             console.log(this.currentId);
-        },
-        editCategory: function () {
-            console.log("Sirvio el click");
         },
         deleteCategory: function (id) {
             request

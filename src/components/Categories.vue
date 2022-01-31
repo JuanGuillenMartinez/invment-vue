@@ -52,11 +52,21 @@ export default {
     methods: {
         showCategories: function () {
             this.changed = false;
-            request.getAll().then(({ data: response }) => {
-                const { data } = response;
-                console.log(data);
-                this.categories = data;
-            });
+            request
+                .getAll()
+                .then(({ data: response }) => {
+                    const { data } = response;
+                    console.log(data);
+                    this.categories = data;
+                })
+                .catch((error) => {
+                    const {
+                        response: {
+                            data: { message },
+                        },
+                    } = error;
+                    console.log(message);
+                });
         },
         editCategory: function () {
             console.log("Sirvio el click");
@@ -74,7 +84,7 @@ export default {
                             data: { message },
                         },
                     } = error;
-                    alert(message);
+                    console.log(message);
                 });
         },
         showCategory: function () {

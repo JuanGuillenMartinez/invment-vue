@@ -40,6 +40,8 @@ export default {
                     data: { message },
                 } = response;
                 alert(message);
+            }).catch((error) => {
+                error.toJSON();
             });
         },
     },

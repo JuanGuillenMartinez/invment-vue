@@ -66,7 +66,6 @@ export default {
                 .delete(id)
                 .then(({ data: response }) => {
                     const { message } = response;
-                    console.log(message);
                     this.changed = true;
                 })
                 .catch((error) => {
@@ -84,8 +83,9 @@ export default {
     },
     watch: {
         changed(change) {
-            console.log("cambio");
-            this.showCategories();
+            if (change) {
+                this.showCategories();
+            }
         },
     },
     mounted() {

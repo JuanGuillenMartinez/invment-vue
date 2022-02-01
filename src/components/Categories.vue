@@ -4,7 +4,12 @@
             <h1>Lista de Categorías</h1>
         </div>
         <div>
-            <button type="button" class="btn btn-success">
+            <button
+                data-bs-toggle="modal"
+                data-bs-target="#modal-add"
+                type="button"
+                class="btn btn-success"
+            >
                 Añadir categoría
             </button>
         </div>
@@ -36,7 +41,10 @@
                                         @click="setCurrentId(category)"
                                         class="fas fa-trash btn-awesome"
                                     ></i>
-                                    <i @click="setCurrentCategory(category)" class="far fa-eye btn-awesome"></i>
+                                    <i
+                                        @click="setCurrentCategory(category)"
+                                        class="far fa-eye btn-awesome"
+                                    ></i>
                                 </div>
                             </td>
                         </tr>
@@ -44,7 +52,41 @@
                 </table>
             </div>
             <div class="container-cat container-form">
-                <FormCategory v-on:refreshCategories="refresh" v-if="showed" :category="currentCategory" />
+                <FormCategory
+                    v-on:refreshCategories="refresh"
+                    v-if="showed"
+                    :category="currentCategory"
+                />
+            </div>
+        </div>
+        <div class="modal-add-category">
+            <div
+                class="modal fade"
+                id="modal-add"
+                tabindex="-1"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Añadir categoría
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            <add-category
+                                v-on:changedCategories="showCategories"
+                            />
+                        </div>
+                        <div class="modal-footer"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -53,9 +95,10 @@
 <script>
 import request from "@/js/CategoryRequest";
 import FormCategory from "@/components/FormCategory.vue";
+import AddCategory from "./AddCategory.vue";
 
 export default {
-    components: { FormCategory },
+    components: { FormCategory, AddCategory },
     data: function () {
         return {
             categories: [],
@@ -65,12 +108,12 @@ export default {
         };
     },
     methods: {
-        refresh: function(id) {
-            this.showCategory(id)
-            this.showCategories()
+        refresh: function (id) {
+            this.showCategory(id);
+            this.showCategories();
         },
         setCurrentCategory: function (category) {
-            this.currentCategory = category
+            this.currentCategory = category;
             this.showed = true;
         },
         showCategories: function () {
@@ -89,9 +132,9 @@ export default {
         showCategory: function (id) {
             this.currentId = id;
             this.showed = true;
-            request.get(id).then( ( { data: { data } } ) => {
-                this.currentCategory = data
-            })
+            request.get(id).then(({ data: { data } }) => {
+                this.currentCategory = data;
+            });
             console.log(this.currentId);
         },
         deleteCategory: function (id) {

@@ -47,7 +47,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="container-cat container-form">
+            <div v-if="showed" class="container-cat container-form">
                 <FormCategory
                     v-on:refreshCategories="refresh"
                     v-if="showed"

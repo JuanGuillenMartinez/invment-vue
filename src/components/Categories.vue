@@ -34,11 +34,7 @@
                             <td>
                                 <div class="button-container">
                                     <i
-                                        @click="setCurrentId(category)"
-                                        class="far fa-plus-square btn-awesome"
-                                    ></i>
-                                    <i
-                                        @click="setCurrentId(category)"
+                                        @click="deleteCategory(category)"
                                         class="fas fa-trash btn-awesome"
                                     ></i>
                                     <i
@@ -137,9 +133,9 @@ export default {
             });
             console.log(this.currentId);
         },
-        deleteCategory: function (id) {
+        deleteCategory: function (category) {
             request
-                .delete(id)
+                .delete(category.id)
                 .then(({ data: response }) => {
                     const { message } = response;
                     this.changed = true;
